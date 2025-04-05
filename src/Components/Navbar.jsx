@@ -18,7 +18,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`px-8 py-4 sticky top-0 z-10 shadow-md ${
+      className={`px-12 py-4 sticky top-0 z-10 shadow-md ${
         isDarkMode ? "bg-green-900" : "bg-green-600"
       } text-white`}
     >

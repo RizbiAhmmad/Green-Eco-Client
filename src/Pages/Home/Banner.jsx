@@ -22,7 +22,7 @@ const Banner = () => {
 
         {/* Tagline */}
         <p className="text-lg md:text-2xl mb-6 text-green-100">
-          Empowering Sustainability, Conservation, and Climate Action
+        Growing a Better World with Care, Nature, and Climate Help
         </p>
 
         {/* Call-to-Action Buttons */}
