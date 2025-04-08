@@ -64,7 +64,7 @@ const Navbar = () => {
             Events
           </NavLink>
           <NavLink
-            to="/donate"
+            to="/donation"
             className={({ isActive }) =>
               isActive
                 ? "text-green-200 font-bold border-b-2 border-green-200 pb-1"

@@ -3,11 +3,11 @@ import backgroundImage from '../../assets/Banner.jpg'; // Adjust the file name a
 
 const Banner = () => {
   // Debug: Log the imported image path to confirm it’s loading
-  console.log('Background Image Path:', backgroundImage);
+  // console.log('Background Image Path:', backgroundImage);
 
   return (
     <section
-      className="w-full h-[60vh] md:h-[80vh] bg-cover bg-center flex items-center justify-center bg-green-600" // Fallback background color
+      className="w-full h-[60vh] md:h-[100vh] bg-cover bg-center flex items-center justify-center bg-green-600" // Fallback background color
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${backgroundImage})`,
       }}
