@@ -26,17 +26,37 @@ const SignUp = () => {
         updateUserProfile(data.name, data.photoURL)
           .then(() => {
             console.log("User profile updated");
-            reset();
-            Swal.fire({
-              title: "User created successfully",
-              icon: "success",
-              draggable: true,
-            });
-            navigate("/");
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+              photoURL: data.photoURL,
+              role: 'user', 
+              createdAt: new Date(),
+            };
+            fetch('http://localhost:5000/users', {
+              method: 'POST',
+              headers: {
+                'content-type': 'application/json',
+              },
+              body: JSON.stringify(userInfo),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.insertedId || data.message === 'User already exists') {
+                  reset();
+                  Swal.fire({
+                    title: "User created successfully",
+                    icon: "success",
+                    draggable: true,
+                  });
+                  navigate("/");
+                }
+              })
+              .catch((error) => console.log("Error saving user to MongoDB:", error));
           })
-          .catch((error) => console.log(error));
+          .catch((error) => console.log("Error updating user profile:", error));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log("Error creating user:", error));
   };
 
   return (

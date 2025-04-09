@@ -10,8 +10,28 @@ const SocialLogin = () => {
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((result) => {
-        console.log(result.user);
-        navigate("/");
+        const user = result.user;
+        console.log(user);
+        const userInfo = {
+          name: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+          role: 'user', // Changed 'normal user' to 'user'
+          createdAt: new Date(),
+        };
+        fetch('http://localhost:5000/users', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify(userInfo),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("User saved to MongoDB:", data);
+            navigate("/");
+          })
+          .catch((error) => console.error("Error saving user to MongoDB:", error));
       })
       .catch((error) => console.error("Google Sign-In Error:", error));
   };

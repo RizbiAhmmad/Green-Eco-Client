@@ -16,6 +16,7 @@ const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [userRole, setUserRole] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const googleProvider = new GoogleAuthProvider();
@@ -37,6 +38,7 @@ const AuthProvider = ({ children }) => {
 
   const logOut = () => {
     setLoading(true);
+    setUserRole(null);
     return signOut(auth);
   };
 
@@ -47,9 +49,29 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+  const fetchUserRole = async (email) => {
+    if (email) {
+      try {
+        const response = await fetch(`http://localhost:5000/users/${email}`);
+        const userData = await response.json();
+        setUserRole(userData?.role || 'user'); 
+      } catch (error) {
+        console.log("Error fetching user role:", error);
+        setUserRole('user'); 
+      }
+    } else {
+      setUserRole(null);
+    }
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      if (currentUser) {
+        fetchUserRole(currentUser.email);
+      } else {
+        setUserRole(null);
+      }
       setLoading(false);
     });
 
@@ -58,6 +80,7 @@ const AuthProvider = ({ children }) => {
 
   const authInfo = {
     user,
+    userRole,
     loading,
     createUser,
     signIn,
