@@ -9,6 +9,7 @@ import Events from "../Pages/Events/Events";
 import Donation from "../Pages/Donations/Donation";
 import About from "../Pages/About/About";
 import Contact from "../Pages/Contact/Contact";
+import Profile from "../Dashboard/Profile/Profile";
 
   export const router = createBrowserRouter([
     {
@@ -42,6 +43,10 @@ import Contact from "../Pages/Contact/Contact";
         {
           path:'contact',
           element: <Contact></Contact>
+        },
+        {
+          path:'profile',
+          element: <Profile></Profile>
         }
       ]
     },
