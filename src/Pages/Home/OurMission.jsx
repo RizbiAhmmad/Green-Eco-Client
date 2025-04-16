@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
-import { FaLeaf, FaTree, FaUsers } from 'react-icons/fa'; // Icons for focus areas
+import { FaLeaf, FaTree, FaUsers } from 'react-icons/fa';
+import { ThemeContext } from '../../provider/ThemeProvider';
 
 const OurMission = () => {
-  // Animation variants for the section
+  const { isDarkMode } = useContext(ThemeContext);
+
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
   };
 
-  // Animation variants for focus cards
   const cardVariants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: (i) => ({
@@ -42,7 +43,11 @@ const OurMission = () => {
   ];
 
   return (
-    <section className="py-12 bg-gray-100 text-gray-800">
+    <section
+      className={`py-16 ${
+        isDarkMode ? 'bg-gray-900' : 'bg-gray-100'
+      }`}
+    >
       <div className="container mx-auto px-4">
         {/* Mission Statement */}
         <motion.div
@@ -52,10 +57,14 @@ const OurMission = () => {
           viewport={{ once: true }}
           variants={sectionVariants}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
+            isDarkMode ? 'text-green-400' : 'text-green-700'
+          }`}>
             Our <span className="text-green-600">Mission</span>
           </h2>
-          <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+          <p className={`text-lg text-gray-700 max-w-2xl mx-auto ${
+            isDarkMode ? 'text-white' : 'text-gray-700'
+          }`}>
             At GreenEco, we are dedicated to fighting climate change, protecting nature, and building a sustainable future. Together, we can make the planet greener and healthier for everyone!
           </p>
         </motion.div>
@@ -65,7 +74,9 @@ const OurMission = () => {
           {focusAreas.map((area, index) => (
             <motion.div
               key={index}
-              className="bg-white p-6 rounded-lg shadow-lg text-center"
+              className={`p-6 rounded-xl shadow-lg ${
+                isDarkMode ? 'bg-gray-800/80 border border-gray-700' : 'bg-white/90 border border-gray-200'
+              }`}
               custom={index}
               initial="hidden"
               whileInView="visible"
@@ -74,8 +85,12 @@ const OurMission = () => {
               variants={cardVariants}
             >
               <div className="flex justify-center mb-4">{area.icon}</div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">{area.title}</h3>
-              <p className="text-gray-600">{area.description}</p>
+              <h3 className={`text-xl text-center font-semibold mb-2 ${
+                isDarkMode ? 'text-green-400' : 'text-gray-800'
+              }`}>{area.title}</h3>
+              <p className={`text-center text-base leading-relaxed font-medium ${
+                isDarkMode ? 'text-gray-300' : 'text-gray-600'
+              }`}>{area.description}</p>
             </motion.div>
           ))}
         </div>

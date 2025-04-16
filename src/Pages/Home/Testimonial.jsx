@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
+import { ThemeContext } from '../../provider/ThemeProvider';
 
 const Testimonial = () => {
+  const { isDarkMode } = useContext(ThemeContext);
+
   const testimonials = [
     {
       quote: 'GreenEco made it so easy to contribute to a greener planet. I’m proud to be a volunteer!',
@@ -37,33 +40,45 @@ const Testimonial = () => {
         size={18}
         className={`${
           i < rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'
-        }`}
+        } ${isDarkMode ? 'text-gray-500' : ''}`}
       />
     ));
   };
 
   return (
-    <section className="py-16 bg-gray-100 text-black">
-      <div className="container mx-auto px-6 md:px-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
+    <section
+      className={`py-16 ${
+        isDarkMode ? 'bg-gray-900' : 'bg-gray-100'
+      }`}
+    >
+      <div className="container mx-auto px-4 md:px-12">
+        <h2 className={`text-3xl md:text-4xl font-bold text-center mb-12 ${
+          isDarkMode ? 'text-green-400' : 'text-green-700'
+        }`}>
           What People <span className="text-green-600">Say</span>
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid text-center justify-center items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={index}
-              className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow"
+              className={`p-8 rounded-2xl shadow-lg ${
+                isDarkMode ? 'bg-gray-800/80 border border-gray-700' : 'bg-white/90 border border-gray-200'
+              } hover:shadow-xl transition-shadow`}
               custom={index}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={testimonialVariants}
             >
-              <div className="mb-4 text-yellow-400 flex gap-1">
+              <div className="mb-4 justify-center flex gap-1">
                 {renderStars(testimonial.rating)}
               </div>
-              <p className="text-gray-600 italic mb-6">“{testimonial.quote}”</p>
-              <p className="text-green-600 font-semibold">{testimonial.author}</p>
+              <p className={`italic mb-6 ${
+                isDarkMode ? 'text-gray-300' : 'text-gray-600'
+              }`}>“{testimonial.quote}”</p>
+              <p className={`font-semibold ${
+                isDarkMode ? 'text-green-400' : 'text-green-600'
+              }`}>{testimonial.author}</p>
             </motion.div>
           ))}
         </div>

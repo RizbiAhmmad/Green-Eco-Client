@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
+import { ThemeContext } from '../../provider/ThemeProvider';
 
-const FeaturedEvent= () => {
+const FeaturedEvent = () => {
+  const { isDarkMode } = useContext(ThemeContext);
+
   const events = [
     {
       title: 'Tree Planting Day',
@@ -31,16 +34,24 @@ const FeaturedEvent= () => {
   };
 
   return (
-    <section className="py-12 bg-gray-100">
-      <div className="container mx-auto px-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-8">
+    <section
+      className={`py-16 ${
+        isDarkMode ? 'bg-gray-900' : 'bg-gray-100'
+      }`}
+    >
+      <div className="container mx-auto px-4 md:px-12">
+        <h2 className={`text-3xl md:text-4xl font-bold text-center mb-12 ${
+          isDarkMode ? 'text-green-400' : 'text-green-700'
+        }`}>
           Upcoming <span className="text-green-600">Events</span>
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {events.map((event, index) => (
             <motion.div
               key={index}
-              className="bg-white p-6 rounded-lg shadow-md"
+              className={`p-6 rounded-xl shadow-lg ${
+                isDarkMode ? 'bg-gray-800/80 border border-gray-700' : 'bg-white/90 border border-gray-200'
+              }`}
               custom={index}
               initial="hidden"
               whileInView="visible"
@@ -48,14 +59,22 @@ const FeaturedEvent= () => {
               whileHover="hover"
               variants={eventVariants}
             >
-              <h3 className="text-xl font-bold text-gray-800 mb-2">{event.title}</h3>
-              <p className="text-gray-600 mb-2">
+              <h3 className={`text-xl font-bold mb-2 ${
+                isDarkMode ? 'text-green-400' : 'text-gray-800'
+              }`}>{event.title}</h3>
+              <p className={`text-gray-600 mb-2 ${
+                isDarkMode ? 'text-gray-300' : 'text-gray-600'
+              }`}>
                 <span className="font-semibold">Date:</span> {event.date}
               </p>
-              <p className="text-gray-600 mb-2">
+              <p className={`text-gray-600 mb-2 ${
+                isDarkMode ? 'text-gray-300' : 'text-gray-600'
+              }`}>
                 <span className="font-semibold">Location:</span> {event.location}
               </p>
-              <p className="text-gray-600">{event.description}</p>
+              <p className={`text-gray-600 ${
+                isDarkMode ? 'text-gray-300' : 'text-gray-600'
+              }`}>{event.description}</p>
             </motion.div>
           ))}
         </div>

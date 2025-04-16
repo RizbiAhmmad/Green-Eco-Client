@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
-import { FaRecycle, FaLightbulb, FaTree } from 'react-icons/fa'; // Icons for each tip
+import { FaRecycle, FaLightbulb, FaTree } from 'react-icons/fa';
+import { ThemeContext } from '../../provider/ThemeProvider';
 
 const EcoTips = () => {
+  const { isDarkMode } = useContext(ThemeContext);
+
   const tips = [
     {
       title: 'Reduce Plastic Use',
@@ -35,16 +38,24 @@ const EcoTips = () => {
   };
 
   return (
-    <section className="py-12 bg-gray-100">
-      <div className="container mx-auto px-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-8">
+    <section
+      className={`py-16 ${
+        isDarkMode ? 'bg-gray-900' : 'bg-gray-100'
+      }`}
+    >
+      <div className="container mx-auto px-4 md:px-12">
+        <h2 className={`text-3xl md:text-4xl font-bold text-center mb-12 ${
+          isDarkMode ? 'text-green-400' : 'text-green-700'
+        }`}>
           Simple <span className="text-green-600">Eco Tips</span>
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {tips.map((tip, index) => (
             <motion.div
               key={index}
-              className="bg-white p-6 rounded-lg shadow-md text-center"
+              className={`p-6 rounded-xl shadow-lg ${
+                isDarkMode ? 'bg-gray-800/80 border border-gray-700' : 'bg-white/90 border border-gray-200'
+              }`}
               custom={index}
               initial="hidden"
               whileInView="visible"
@@ -52,11 +63,13 @@ const EcoTips = () => {
               whileHover="hover"
               variants={tipVariants}
             >
-              <div className="flex justify-center mb-4">
-                {tip.icon}
-              </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">{tip.title}</h3>
-              <p className="text-gray-600">{tip.description}</p>
+              <div className="flex justify-center mb-6">{tip.icon}</div>
+              <h3 className={`text-xl text-center font-bold mb-4 ${
+                isDarkMode ? 'text-green-400' : 'text-gray-800'
+              }`}>{tip.title}</h3>
+              <p className={`text-base text-center leading-relaxed ${
+                isDarkMode ? 'text-gray-300' : 'text-gray-600'
+              }`}>{tip.description}</p>
             </motion.div>
           ))}
         </div>

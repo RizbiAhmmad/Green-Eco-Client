@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
+import { ThemeContext } from '../../provider/ThemeProvider';
 
 const ImpactStats = () => {
+  const { isDarkMode } = useContext(ThemeContext);
+
   const stats = [
     { label: 'Trees Planted', value: '10,000+' },
     { label: 'Funds Raised', value: '$500K+' },
@@ -18,24 +21,36 @@ const ImpactStats = () => {
   };
 
   return (
-    <section className="py-12 bg-gray-100 text-black">
-      <div className="container mx-auto px-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
+    <section
+      className={`py-16 ${
+        isDarkMode ? 'bg-gray-900' : 'bg-gray-100'
+      }`}
+    >
+      <div className="container mx-auto px-4 md:px-12">
+        <h2 className={`text-3xl md:text-4xl font-bold text-center mb-12 ${
+          isDarkMode ? 'text-green-400' : 'text-green-700'
+        }`}>
           Our <span className="text-green-400">Impact</span>
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
-              className="p-6"
+              className={`p-6 rounded-xl shadow-lg ${
+                isDarkMode ? 'bg-gray-800/80 border border-gray-700' : 'bg-white/90 border border-gray-200'
+              }`}
               custom={index}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={statVariants}
             >
-              <h3 className="text-4xl font-bold text-green-400 mb-2">{stat.value}</h3>
-              <p className="text-lg">{stat.label}</p>
+              <h3 className={`text-4xl font-bold text-center mb-2 ${
+                isDarkMode ? 'text-green-400' : 'text-green-400'
+              }`}>{stat.value}</h3>
+              <p className={`text-lg text-center ${
+                isDarkMode ? 'text-gray-300' : 'text-gray-600'
+              }`}>{stat.label}</p>
             </motion.div>
           ))}
         </div>
