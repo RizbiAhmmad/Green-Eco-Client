@@ -10,6 +10,7 @@ import Donation from "../Pages/Donations/Donation";
 import About from "../Pages/About/About";
 import Contact from "../Pages/Contact/Contact";
 import Profile from "../Dashboard/Profile/Profile";
+import AddEvent from "../Dashboard/Admin/AddEvent";
 
   export const router = createBrowserRouter([
     {
@@ -47,7 +48,11 @@ import Profile from "../Dashboard/Profile/Profile";
         {
           path:'profile',
           element: <Profile></Profile>
-        }
+        },
+        {
+          path:'addevent',
+          element:<AddEvent></AddEvent>
+        },
       ]
     },
   ]);
