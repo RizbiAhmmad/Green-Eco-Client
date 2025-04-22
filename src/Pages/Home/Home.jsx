@@ -8,6 +8,7 @@ import Testimonial from './Testimonial';
 import CallToAction from './CallToAction';
 import EcoTips from './EcoTips';
 import OurMission from './OurMission';
+import Achievements from './Achievements';
 
 const Home = () => {
     return (
@@ -18,6 +19,7 @@ const Home = () => {
             <FeaturedEvent></FeaturedEvent>
             <OurMission></OurMission>
             <EcoTips></EcoTips>
+            <Achievements></Achievements>
             <ImpactStats></ImpactStats>
             <Testimonial></Testimonial>
             <CallToAction></CallToAction>
