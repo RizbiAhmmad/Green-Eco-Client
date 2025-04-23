@@ -9,6 +9,7 @@ import CallToAction from './CallToAction';
 import EcoTips from './EcoTips';
 import OurMission from './OurMission';
 import Achievements from './Achievements';
+import EcoChat from './EcoChat';
 
 const Home = () => {
     return (
@@ -22,6 +23,7 @@ const Home = () => {
             <Achievements></Achievements>
             <ImpactStats></ImpactStats>
             <Testimonial></Testimonial>
+            <EcoChat></EcoChat>
             <CallToAction></CallToAction>
         </div>
     );
