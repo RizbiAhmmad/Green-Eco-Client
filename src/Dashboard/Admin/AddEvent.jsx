@@ -102,7 +102,7 @@ const AddEvent = () => {
             <textarea
               {...register("description", { required: "Description is required" })}
               placeholder="Describe the event"
-              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 h-32 resize-none ${
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 h-12 resize-none ${
                 isDarkMode
                   ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400'
                   : 'bg-white border-gray-300 text-gray-800 placeholder-gray-500'

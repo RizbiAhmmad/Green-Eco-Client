@@ -11,6 +11,7 @@ import About from "../Pages/About/About";
 import Contact from "../Pages/Contact/Contact";
 import Profile from "../Dashboard/Profile/Profile";
 import AddEvent from "../Dashboard/Admin/AddEvent";
+import Dashboard from "../Layouts/Dashboard";
 
   export const router = createBrowserRouter([
     {
@@ -50,9 +51,19 @@ import AddEvent from "../Dashboard/Admin/AddEvent";
           element: <Profile></Profile>
         },
         {
-          path:'addevent',
-          element:<AddEvent></AddEvent>
+         
         },
       ]
     },
+
+    {
+      path: "/dashboard",
+      element:<Dashboard></Dashboard>,
+      children:[
+        {
+          path:'addevent',
+          element:<AddEvent></AddEvent>
+        }
+      ]
+    }
   ]);

@@ -108,6 +108,16 @@ const Navbar = () => {
           >
             Profile
           </NavLink>
+          <NavLink
+            to="/dashboard"
+            className={({ isActive }) =>
+              isActive
+                ? "text-green-200 font-bold border-b-2 border-green-200 pb-1"
+                : "text-white hover:text-green-200"
+            }
+          >
+            Dashboard
+          </NavLink>
         </div>
 
         {/* Right Side (Theme Toggle + Auth + Mobile Menu Toggle) */}
@@ -242,6 +252,17 @@ const Navbar = () => {
                   onClick={() => setMenuOpen(false)}
                 >
                   Profile
+                </NavLink>
+                <NavLink
+                  to="/dashboard"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-green-200 font-bold border-b-2 border-green-200 pb-1"
+                      : "text-white hover:text-green-200"
+                  }
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Dashboard
                 </NavLink>
               </div>
             </motion.div>
