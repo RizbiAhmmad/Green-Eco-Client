@@ -19,14 +19,14 @@ const Donation = () => {
 
   const handleAmountSelect = (amount) => {
     setSelectedAmount(amount);
-    setCustomAmount(amount.toString()); // Update custom input to reflect the selected amount
+    setCustomAmount(amount.toString());
   };
 
   const handleCustomAmountChange = (e) => {
     const value = e.target.value;
     setCustomAmount(value);
     const parsedValue = value ? parseInt(value) : 0;
-    setSelectedAmount(parsedValue || 0); // Update selectedAmount based on custom input
+    setSelectedAmount(parsedValue || 0); 
   };
 
   const sectionVariants = {
@@ -36,7 +36,7 @@ const Donation = () => {
 
   return (
     <section
-      className={`py-16 ${
+      className={`py-12 ${
         isDarkMode ? 'bg-gray-900' : 'bg-gray-100'
       }`}
     >

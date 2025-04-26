@@ -6,9 +6,17 @@ const Dashboard = () => {
         <div className='flex'>
             <div className="w-56 min-h-full bg-emerald-500" >
 
-                <ul>
-                    <li> <NavLink to="/dashboard/allUser"> All User </NavLink> </li>
-                    <li> <NavLink to="/dashboard/addEvent"> Add Event </NavLink> </li>
+                <ul className='menu p-4'>
+                    {
+                        isAdmin ? <>
+                        <li> <NavLink to="/dashboard/allUser"> All User </NavLink> </li>
+                        <li> <NavLink to="/dashboard/addEvent"> Add Event </NavLink> </li>
+                        </>
+                        :
+                        <>
+                        hi
+                        </>
+                    }
                 </ul>
 
             </div>
