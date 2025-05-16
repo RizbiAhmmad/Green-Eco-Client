@@ -8,15 +8,16 @@ const Profile = () => {
   const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
-    if (user && user.email) {
-      axiosPublic
-        .get("/users/role", { params: { email: user.email } })
-        .then((response) => {
-          setUserRole(response.data.role);
-        })
-        .catch((error) => console.error("Error fetching user role:", error));
-    }
-  }, [axiosPublic, user]);
+  if (user && user.email) {
+    axiosPublic
+      .get(`/users/${user.email}`)
+      .then((response) => {
+        setUserRole(response.data.role);
+      })
+      .catch((error) => console.error("Error fetching user role:", error));
+  }
+}, [axiosPublic, user]);
+
 
   const joiningDate = user?.metadata?.creationTime || "N/A";
   const lastLogin = user?.metadata?.lastSignInTime || "N/A";
