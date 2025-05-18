@@ -12,6 +12,7 @@ import Contact from "../Pages/Contact/Contact";
 import Profile from "../Dashboard/Profile/Profile";
 import AddEvent from "../Dashboard/Admin/AddEvent";
 import Dashboard from "../Layouts/Dashboard";
+import AllUsers from "../Dashboard/Admin/AllUsers";
 
   export const router = createBrowserRouter([
     {
@@ -60,6 +61,10 @@ import Dashboard from "../Layouts/Dashboard";
       path: "/dashboard",
       element:<Dashboard></Dashboard>,
       children:[
+        {
+          path:'allUser',
+          element: <AllUsers></AllUsers>
+        },
         {
           path:'addevent',
           element:<AddEvent></AddEvent>
