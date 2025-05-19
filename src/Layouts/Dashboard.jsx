@@ -7,7 +7,7 @@ const Dashboard = () => {
 
     return (
         <div className='flex'>
-            <div className="w-56 min-h-full bg-emerald-500" >
+            <div className="w-56 min-h-screen bg-emerald-500" >
 
                 <ul className='menu p-4'>
                     {
