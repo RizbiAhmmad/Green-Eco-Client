@@ -15,14 +15,14 @@ const AllUsers = () => {
     });
 
     const handleMakeAdmin = user => {
-        axiosPublic.patch(`/users/admin/${user._id}`) 
+        axiosPublic.patch(`/users/admin/${user._id}`)
             .then(res => {
                 if (res.data.modifiedCount > 0) {
                     refetch();
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: `${user.name} is an Admin Now!`,
+                        title: `${user.name} is now an Admin!`,
                         showConfirmButton: false,
                         timer: 1500
                     });
@@ -33,7 +33,7 @@ const AllUsers = () => {
     const handleDeleteUser = user => {
         Swal.fire({
             title: "Are you sure?",
-            text: "You won't be able to revert this!",
+            text: "This action cannot be undone!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -41,13 +41,13 @@ const AllUsers = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosPublic.delete(`/users/${user._id}`) // <-- update here
+                axiosPublic.delete(`/users/${user._id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             refetch();
                             Swal.fire({
                                 title: "Deleted!",
-                                text: "User has been deleted.",
+                                text: "User has been removed.",
                                 icon: "success"
                             });
                         }
@@ -57,49 +57,48 @@ const AllUsers = () => {
     };
 
     return (
-        <div className="p-4">
-            <div className="my-4">
-                <h2 className="text-center text-3xl">All Users</h2>
-            </div>
-            <div className="overflow-x-auto">
-                <table className="table table-zebra w-full">
-                    <thead>
+        <div className="p-6 max-w-6xl mx-auto">
+            <h2 className="text-4xl font-bold text-center mb-8 border-b-2 border-gray-200 pb-4">All Users</h2>
+            <div className="overflow-x-auto rounded-lg shadow-lg bg-white">
+                <table className="w-full text-sm text-left table-auto">
+                    <thead className="bg-gray-100 text-gray-700 uppercase tracking-wider">
                         <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Action</th>
+                            <th className="px-6 py-3">#</th>
+                            <th className="px-6 py-3">Name</th>
+                            <th className="px-6 py-3">Email</th>
+                            <th className="px-6 py-3">Role</th>
+                            <th className="px-6 py-3">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {
-                            users.map((user, index) => (
-                                <tr key={user._id}>
-                                    <th>{index + 1}</th>
-                                    <td>{user.name}</td>
-                                    <td>{user.email}</td>
-                                    <td>
-                                        {
-                                            user.role === 'admin' ?
-                                                'Admin' :
-                                                <button
-                                                    onClick={() => handleMakeAdmin(user)}
-                                                    className="btn btn-sm bg-green-500">
-                                                    Make Admin
-                                                </button>
-                                        }
-                                    </td>
-                                    <td>
+                    <tbody className="divide-y divide-gray-200">
+                        {users.map((user, index) => (
+                            <tr key={user._id} className="hover:bg-gray-50 transition duration-200">
+                                <td className="px-6 py-4 font-medium text-gray-800">{index + 1}</td>
+                                <td className="px-6 py-4">{user.name}</td>
+                                <td className="px-6 py-4">{user.email}</td>
+                                <td className="px-6 py-4">
+                                    {user.role === 'admin' ? (
+                                        <span className="text-green-600 font-semibold">Admin</span>
+                                    ) : (
                                         <button
-                                            onClick={() => handleDeleteUser(user)}
-                                            className="btn btn-ghost btn-lg">
-                                            <FaTrashAlt className="text-red-600" />
+                                            onClick={() => handleMakeAdmin(user)}
+                                            className="bg-green-500 hover:bg-green-600 text-white text-xs px-3 py-1 rounded-md transition duration-200"
+                                        >
+                                            Make Admin
                                         </button>
-                                    </td>
-                                </tr>
-                            ))
-                        }
+                                    )}
+                                </td>
+                                <td className="px-6 py-4">
+                                    <button
+                                        onClick={() => handleDeleteUser(user)}
+                                        className="text-red-600 hover:text-red-800 transition duration-200"
+                                        title="Delete User"
+                                    >
+                                        <FaTrashAlt className="text-lg" />
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
