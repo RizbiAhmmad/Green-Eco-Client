@@ -62,7 +62,7 @@ import AllUsers from "../Dashboard/Admin/AllUsers";
       element:<Dashboard></Dashboard>,
       children:[
         {
-          path:'allUser',
+          path:'allUsers',
           element: <AllUsers></AllUsers>
         },
         {
