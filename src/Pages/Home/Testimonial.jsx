@@ -1,7 +1,11 @@
 import React, { useContext } from 'react';
-import { motion } from 'framer-motion';
-import { Star } from 'lucide-react';
 import { ThemeContext } from '../../provider/ThemeProvider';
+import { Star } from 'lucide-react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/autoplay';
 
 const Testimonial = () => {
   const { isDarkMode } = useContext(ThemeContext);
@@ -22,16 +26,17 @@ const Testimonial = () => {
       author: 'Emily White, Volunteer',
       rating: 5,
     },
+    {
+      quote: 'The team at GreenEco is so supportive and organized. I’ve recommended them to all my friends!',
+      author: 'Michael Brown, Volunteer',
+      rating: 5,
+    },
+    {
+      quote: 'Every penny I donated was worth it. I received updates and felt truly involved.',
+      author: 'Sarah Lee, Donor',
+      rating: 4,
+    },
   ];
-
-  const testimonialVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: (i) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: i * 0.2, duration: 0.6, ease: 'easeOut' },
-    }),
-  };
 
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, i) => (
@@ -46,42 +51,51 @@ const Testimonial = () => {
   };
 
   return (
-    <section
-      className={`py-16 ${
-        isDarkMode ? 'bg-gray-900' : 'bg-gray-100'
-      }`}
-    >
+    <section className={`py-16 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-100'}`}>
       <div className="container mx-auto px-4 md:px-12">
         <h2 className={`text-3xl md:text-4xl font-bold text-center mb-12 ${
           isDarkMode ? 'text-green-400' : 'text-green-700'
         }`}>
           What People <span className="text-green-600">Say</span>
         </h2>
-        <div className="grid text-center justify-center items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <Swiper
+          modules={[Autoplay, Pagination]}
+          slidesPerView={1}
+          spaceBetween={30}
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 4000, disableOnInteraction: false }}
+          breakpoints={{
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
+        >
           {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={index}
-              className={`p-8 rounded-2xl shadow-lg ${
-                isDarkMode ? 'bg-gray-800/80 border border-gray-700' : 'bg-white/90 border border-gray-200'
-              } hover:shadow-xl transition-shadow`}
-              custom={index}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={testimonialVariants}
-            >
-              <div className="mb-4 justify-center flex gap-1">
-                {renderStars(testimonial.rating)}
+            <SwiperSlide key={index}>
+              <div
+                className={`p-8 rounded-2xl shadow-lg h-full mx-auto max-w-md ${
+                  isDarkMode
+                    ? 'bg-gray-800/80 border border-gray-700 text-white'
+                    : 'bg-white/90 border border-gray-200 text-black'
+                } hover:shadow-xl transition-shadow`}
+              >
+                <div className="mb-4 justify-center flex gap-1">
+                  {renderStars(testimonial.rating)}
+                </div>
+                <p className={`italic mb-6 ${
+                  isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                }`}>
+                  “{testimonial.quote}”
+                </p>
+                <p className={`font-semibold ${
+                  isDarkMode ? 'text-green-400' : 'text-green-600'
+                }`}>
+                  {testimonial.author}
+                </p>
               </div>
-              <p className={`italic mb-6 ${
-                isDarkMode ? 'text-gray-300' : 'text-gray-600'
-              }`}>“{testimonial.quote}”</p>
-              <p className={`font-semibold ${
-                isDarkMode ? 'text-green-400' : 'text-green-600'
-              }`}>{testimonial.author}</p>
-            </motion.div>
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
       </div>
     </section>
   );
